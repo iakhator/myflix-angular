@@ -27,6 +27,19 @@ export class UserRegistrationService {
     )
   }
 
+  getAllMovies(): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'movies', {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred: ', error.error.message);
@@ -37,5 +50,12 @@ export class UserRegistrationService {
     }
     return throwError('Something bad happened; please try again later.');
   }
+
+  // Non-typed response extraction
+  private extractResponseData(res: Response): any {
+    const body = res;
+    return body || {};
+  }
+
 
 }
