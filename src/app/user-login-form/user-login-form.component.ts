@@ -24,7 +24,6 @@ export class UserLoginFormComponent implements OnInit {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
     // Logic for a successful user registration goes here! To be implemented
     if(result) {
-      console.log(result)
       localStorage.setItem('myFlixuser', JSON.stringify(result))
       this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open('You have successfully logged in', 'OK', {
