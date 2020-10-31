@@ -15,6 +15,7 @@ export class FetchApiDataService  {
 
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
+    
     return this.http.post(apiUrl + 'users', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -27,11 +28,12 @@ export class FetchApiDataService  {
   }
 
   getAllMovies(): Observable<any> {
-    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('myFlixuser'));
+    console.log(user.token);
     return this.http.get(apiUrl + 'movies', {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + user.token,
         })
     }).pipe(
       map(this.extractResponseData),
