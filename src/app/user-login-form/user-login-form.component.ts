@@ -12,6 +12,10 @@ export class UserLoginFormComponent implements OnInit {
 
   @Input() userData = {username: '', password: '' };
 
+    /**
+   * Represents Login.
+   * @constructor
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
@@ -20,6 +24,11 @@ export class UserLoginFormComponent implements OnInit {
     ngOnInit(): void {
     }
 
+  /**
+   *login user
+   * @return void
+   * @memberof UserLoginFormComponent
+   */
   login(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
     // Logic for a successful user registration goes here! To be implemented
